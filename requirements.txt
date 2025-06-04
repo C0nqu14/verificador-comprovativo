@@ -1,0 +1,14 @@
+Flask==2.3.3
+flask-cors==4.0.0
+Werkzeug==2.3.7
+
+# Se usares Pillow para processar imagens (ex: no extrair_texto_arquivo)
+Pillow==10.3.0
+
+# Para PDF e OCR, se estiveres a usar PyMuPDF, pytesseract, etc.
+PyMuPDF==1.24.1
+pytesseract==0.3.10
+
+# Se usares IP info via requests
+requests==2.31.0
+ gunicorn==23.0.0 
