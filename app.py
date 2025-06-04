@@ -4,12 +4,17 @@ import os
 from utils.extrair_texto import extrair_texto_arquivo
 from utils.metadados import obter_metadados
 from utils.localizacao import obter_localizacao_por_ip
+from flask_cors import CORS
+
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+CORS(app) 
+CORS(app, origins=['http://localhost:5173' , 'http://localhost:3000'])
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -41,7 +46,7 @@ def verificar():
         resultado_OCR = 'Válido' if any(p in texto_extraido.lower() for p in palavras_chave_validas) else 'Suspeito'
 
    
-        resultado_metadados = 'Metadados válidos' if metadados else 'Metadados ausentes ou inválidos'
+        resultado_metadados = 'Metadados válidos' if metadados and len(metadados.keys()) > 0 else 'Metadados ausentes ou inválidos'
 
     
         tem_localizacao = localizacao_ip and localizacao_ip.get('pais') is not None
